@@ -18,8 +18,6 @@ import {
     subMonths,
 } from 'date-fns';
 
-import segments from '../segments/data';
-
 const Aside = () => (
     <Card
         sx={{
@@ -134,13 +132,6 @@ const Aside = () => (
                 label="resources.customers.filters.group"
                 icon={<LocalOfferIcon />}
             >
-                {segments.map(segment => (
-                    <FilterListItem
-                        label={segment.name}
-                        key={segment.id}
-                        value={{ groups: segment.id }}
-                    />
-                ))}
             </FilterList>
         </CardContent>
     </Card>

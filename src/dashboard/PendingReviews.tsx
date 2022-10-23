@@ -22,7 +22,6 @@ import {
 import { stringify } from 'query-string';
 
 import CardWithIcon from './CardWithIcon';
-import StarRatingField from '../reviews/StarRatingField';
 import { Customer, Review } from '../types';
 
 const PendingReviews = () => {
@@ -83,19 +82,6 @@ const PendingReviews = () => {
                                 />
                             </ReferenceField>
                         </ListItemAvatar>
-
-                        <ListItemText
-                            primary={<StarRatingField record={record} />}
-                            secondary={record.comment}
-                            sx={{
-                                overflowY: 'hidden',
-                                height: '4em',
-                                display: '-webkit-box',
-                                WebkitLineClamp: 2,
-                                WebkitBoxOrient: 'vertical',
-                                paddingRight: 0,
-                            }}
-                        />
                     </ListItem>
                 ))}
             </List>

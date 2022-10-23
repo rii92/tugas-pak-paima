@@ -11,13 +11,8 @@ import { lightTheme } from './layout/themes';
 
 import visitors from './visitors';
 import orders from './orders';
-import products from './products';
-import invoices from './invoices';
-import categories from './categories';
-import reviews from './reviews';
 import dataProviderFactory from './dataProvider';
 import Configuration from './configuration/Configuration';
-import Segments from './segments/Segments';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'fr') {
@@ -45,7 +40,6 @@ const App = () => {
         >
             <CustomRoutes>
                 <Route path="/configuration" element={<Configuration />} />
-                <Route path="/segments" element={<Segments />} />
             </CustomRoutes>
             <Resource name="customers" {...visitors} />
             <Resource
@@ -53,10 +47,6 @@ const App = () => {
                 {...orders}
                 options={{ label: 'Orders' }}
             />
-            <Resource name="invoices" {...invoices} />
-            <Resource name="products" {...products} />
-            <Resource name="categories" {...categories} />
-            <Resource name="reviews" {...reviews} />
         </Admin>
     );
 };

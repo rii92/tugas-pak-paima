@@ -26,8 +26,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import order from '../orders';
-import review from '../reviews';
-import StarRatingField from '../reviews/StarRatingField';
 import {
     Order as OrderRecord,
     Review as ReviewRecord,
@@ -105,10 +103,6 @@ const EventList = () => {
                         </Grid>
                         {reviews && (
                             <Grid item xs={6} display="flex" gap={1}>
-                                <review.icon
-                                    fontSize="small"
-                                    color="disabled"
-                                />
                                 <Typography variant="body2" flexGrow={1}>
                                     {translate('resources.reviews.amount', {
                                         smart_count: reviews.length,
@@ -130,17 +124,10 @@ const EventList = () => {
                     >
                         <StepLabel
                             icon={
-                                event.type === 'order' ? (
                                     <order.icon
                                         color="disabled"
                                         sx={{ pl: 0.5, fontSize: '1.25rem' }}
                                     />
-                                ) : (
-                                    <review.icon
-                                        color="disabled"
-                                        sx={{ pl: 0.5, fontSize: '1.25rem' }}
-                                    />
-                                )
                             }
                         >
                             {new Date(event.date).toLocaleString(locale, {
@@ -249,7 +236,6 @@ const Review = () => {
                 </Link>
             </Typography>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-                <StarRatingField />
             </Typography>
             <Typography
                 variant="body2"
