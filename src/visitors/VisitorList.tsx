@@ -8,10 +8,10 @@ import {
     NullableBooleanInput,
     NumberField,
     SearchInput,
+    TextField,
 } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 
-import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';
 import CustomerLinkField from './CustomerLinkField';
 import ColoredNumberField from './ColoredNumberField';
@@ -38,35 +38,16 @@ const VisitorList = () => {
             perPage={25}
             aside={<VisitorListAside />}
         >
-            {isXsmall ? (
+            {/* {isXsmall ? (
                 <MobileGrid />
-            ) : (
-                <Datagrid
-                    optimized
-                    rowClick="edit"
-                    sx={{
-                        '& .column-groups': {
-                            md: { display: 'none' },
-                            lg: { display: 'table-cell' },
-                        },
-                    }}
-                >
-                    <CustomerLinkField />
-                    <DateField source="last_seen" />
-                    <NumberField
-                        source="nb_commands"
-                        label="resources.customers.fields.commands"
-                        sx={{ color: 'purple' }}
-                    />
-                    <ColoredNumberField
-                        source="total_spent"
-                        options={{ style: 'currency', currency: 'USD' }}
-                    />
-                    <DateField source="latest_purchase" showTime />
-                    <BooleanField source="has_newsletter" label="News." />
-                    <SegmentsField source="groups" />
+            ) : ( */}
+                <Datagrid>
+                    <TextField source="id" />
+                    <TextField source="name" />
+                    <TextField source="username" />
+                    <TextField source="email" />
                 </Datagrid>
-            )}
+            {/* )} */}
         </List>
     );
 };

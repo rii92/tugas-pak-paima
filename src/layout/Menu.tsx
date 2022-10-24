@@ -12,7 +12,6 @@ import {
 } from 'react-admin';
 
 import visitors from '../visitors';
-import orders from '../orders';
 import SubMenu from './SubMenu';
 
 type MenuName = 'menuCatalog' | 'menuSales' | 'menuCustomers';
@@ -45,23 +44,20 @@ const Menu = ({ dense = false }: MenuProps) => {
         >
             <DashboardMenuItem />
                 <MenuItemLink
-                    to="/commands"
+                    to="/users"
                     state={{ _scrollToTop: true }}
-                    primaryText={translate(`resources.commands.name`, {
-                        smart_count: 2,
-                    })}
-                    leftIcon={<orders.icon />}
-                    dense={dense}
-                />
-                <MenuItemLink
-                    to="/customers"
-                    state={{ _scrollToTop: true }}
-                    primaryText={translate(`resources.customers.name`, {
-                        smart_count: 2,
-                    })}
+                    primaryText={"users"}
                     leftIcon={<visitors.icon />}
                     dense={dense}
                 />
+                <MenuItemLink
+                    to="/todos"
+                    state={{ _scrollToTop: true }}
+                    primaryText={"todos"}
+                    leftIcon={<LabelIcon />}
+                    dense={dense}
+                />
+                
         </Box>
     );
 };

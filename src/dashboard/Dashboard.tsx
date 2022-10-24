@@ -3,13 +3,8 @@ import { useGetList } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 import { subDays, startOfDay } from 'date-fns';
 
-import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
 import NbNewOrders from './NbNewOrders';
-import PendingOrders from './PendingOrders';
-import PendingReviews from './PendingReviews';
-import NewCustomers from './NewCustomers';
-import OrderChart from './OrderChart';
 
 import { Order } from '../types';
 
@@ -90,53 +85,30 @@ const Dashboard = () => {
     return isXSmall ? (
         <div>
             <div style={styles.flexColumn as CSSProperties}>
-                <Welcome />
                 <MonthlyRevenue value={revenue} />
                 <VerticalSpacer />
                 <NbNewOrders value={nbNewOrders} />
                 <VerticalSpacer />
-                <PendingOrders orders={pendingOrders} />
             </div>
         </div>
     ) : isSmall ? (
         <div style={styles.flexColumn as CSSProperties}>
             <div style={styles.singleCol}>
-                <Welcome />
             </div>
             <div style={styles.flex}>
                 <MonthlyRevenue value={revenue} />
                 <Spacer />
                 <NbNewOrders value={nbNewOrders} />
             </div>
-            <div style={styles.singleCol}>
-                <OrderChart orders={recentOrders} />
-            </div>
-            <div style={styles.singleCol}>
-                <PendingOrders orders={pendingOrders} />
-            </div>
         </div>
     ) : (
         <>
-            <Welcome />
             <div style={styles.flex}>
                 <div style={styles.leftCol}>
                     <div style={styles.flex}>
                         <MonthlyRevenue value={revenue} />
                         <Spacer />
                         <NbNewOrders value={nbNewOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
-                        <OrderChart orders={recentOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
-                        <PendingOrders orders={pendingOrders} />
-                    </div>
-                </div>
-                <div style={styles.rightCol}>
-                    <div style={styles.flex}>
-                        <PendingReviews />
-                        <Spacer />
-                        <NewCustomers />
                     </div>
                 </div>
             </div>

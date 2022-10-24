@@ -25,7 +25,6 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-import order from '../orders';
 import {
     Order as OrderRecord,
     Review as ReviewRecord,
@@ -80,16 +79,6 @@ const EventList = () => {
                                 />
                             </Box>
                         </Grid>
-                        {orders && (
-                            <Grid item xs={6} display="flex" gap={1}>
-                                <order.icon fontSize="small" color="disabled" />
-                                <Typography variant="body2" flexGrow={1}>
-                                    {translate('resources.commands.amount', {
-                                        smart_count: orders.length,
-                                    })}
-                                </Typography>
-                            </Grid>
-                        )}
                         <Grid item xs={6} display="flex" gap={1}>
                             <AccessTimeIcon fontSize="small" color="disabled" />
                             <Box flexGrow={1}>
@@ -122,14 +111,7 @@ const EventList = () => {
                         active
                         completed
                     >
-                        <StepLabel
-                            icon={
-                                    <order.icon
-                                        color="disabled"
-                                        sx={{ pl: 0.5, fontSize: '1.25rem' }}
-                                    />
-                            }
-                        >
+                        <StepLabel>
                             {new Date(event.date).toLocaleString(locale, {
                                 weekday: 'long',
                                 year: 'numeric',

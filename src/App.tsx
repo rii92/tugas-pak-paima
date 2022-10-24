@@ -10,9 +10,13 @@ import englishMessages from './i18n/en';
 import { lightTheme } from './layout/themes';
 
 import visitors from './visitors';
-import orders from './orders';
+import todos from './todos';
 import dataProviderFactory from './dataProvider';
 import Configuration from './configuration/Configuration';
+import jsonServerProvider from 'ra-data-json-server';
+
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'fr') {
@@ -27,9 +31,7 @@ const App = () => {
     return (
         <Admin
             title=""
-            dataProvider={dataProviderFactory(
-                process.env.REACT_APP_DATA_PROVIDER || ''
-            )}
+            dataProvider={dataProvider}
             authProvider={authProvider}
             dashboard={Dashboard}
             loginPage={Login}
@@ -41,12 +43,8 @@ const App = () => {
             <CustomRoutes>
                 <Route path="/configuration" element={<Configuration />} />
             </CustomRoutes>
-            <Resource name="customers" {...visitors} />
-            <Resource
-                name="commands"
-                {...orders}
-                options={{ label: 'Orders' }}
-            />
+            <Resource name="users" {...visitors} />
+            <Resource name="todos" {...todos} />
         </Admin>
     );
 };

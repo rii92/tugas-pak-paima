@@ -12,7 +12,6 @@ import {
 
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
-import SegmentsField from './SegmentsField';
 import { Customer } from '../types';
 
 const MobileGrid = () => {
@@ -67,7 +66,6 @@ const MobileGrid = () => {
                         </CardContent>
                         {record.groups && record.groups.length > 0 && (
                             <CardContent sx={{ pt: 0 }}>
-                                <SegmentsField />
                             </CardContent>
                         )}
                     </Card>
