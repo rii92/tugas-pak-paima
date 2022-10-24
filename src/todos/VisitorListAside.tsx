@@ -34,6 +34,24 @@ const Aside = () => (
     >
         <CardContent sx={{ pt: 1 }}>
             <FilterLiveSearch />
+
+            <FilterList
+                label="Has Completed"
+                icon={<MonetizationOnIcon />}
+            >
+                <FilterListItem
+                    label="ra.boolean.true"
+                    value={{
+                        completed: true
+                    }}
+                />
+                <FilterListItem
+                    label="ra.boolean.false"
+                    value={{
+                        completed: false
+                    }}
+                />
+            </FilterList>
         </CardContent>
     </Card>
 );

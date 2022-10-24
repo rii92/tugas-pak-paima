@@ -39,10 +39,10 @@ const VisitorList = () => {
             aside={<VisitorListAside />}
         >
                 <Datagrid>
-                    <TextField source="id" />
-                    <TextField source="name" />
-                    <TextField source="username" />
-                    <TextField source="email" />
+                    <TextField source='userId' />
+                    <TextField source='id' />
+                    <TextField source='title' />
+                    <TextField source='completed' />
                 </Datagrid>
         </List>
     );
