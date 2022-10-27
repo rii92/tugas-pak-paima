@@ -1,5 +1,5 @@
 import React, { useMemo, CSSProperties } from 'react';
-import { useGetList } from 'react-admin';
+import { useGetList, useGetRecordId } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 import { subDays, startOfDay } from 'date-fns';
 
@@ -41,53 +41,19 @@ const Dashboard = () => {
     );
     const aMonthAgo = useMemo(() => subDays(startOfDay(new Date()), 30), []);
 
-    const { data: orders } = useGetList<Order>('commands', {
-        filter: { date_gte: aMonthAgo.toISOString() },
-        sort: { field: 'date', order: 'DESC' },
-        pagination: { page: 1, perPage: 50 },
-    });
+    const { data: orders } = useGetList<Order>('users', {});
+    const users = useGetRecordId('users');
+    const { data: todos } = useGetList<Order>('todos', {pagination: {page: 1, perPage: 300,}});
 
-    const aggregation = useMemo<State>(() => {
-        if (!orders) return {};
-        const aggregations = orders
-            .filter(order => order.status !== 'cancelled')
-            .reduce(
-                (stats: OrderStats, order) => {
-                    if (order.status !== 'cancelled') {
-                        stats.revenue += order.total;
-                        stats.nbNewOrders++;
-                    }
-                    if (order.status === 'ordered') {
-                        stats.pendingOrders.push(order);
-                    }
-                    return stats;
-                },
-                {
-                    revenue: 0,
-                    nbNewOrders: 0,
-                    pendingOrders: [],
-                }
-            );
-        return {
-            recentOrders: orders,
-            revenue: aggregations.revenue.toLocaleString(undefined, {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-            }),
-            nbNewOrders: aggregations.nbNewOrders,
-            pendingOrders: aggregations.pendingOrders,
-        };
-    }, [orders]);
+    let CountUser = orders?.length;
+    let CountTodos = todos?.length;
 
-    const { nbNewOrders, pendingOrders, revenue, recentOrders } = aggregation;
     return isXSmall ? (
         <div>
             <div style={styles.flexColumn as CSSProperties}>
-                <MonthlyRevenue value={revenue} />
+                <MonthlyRevenue value={CountUser?.toString()} />
                 <VerticalSpacer />
-                <NbNewOrders value={nbNewOrders} />
+                <NbNewOrders value={CountTodos} />
                 <VerticalSpacer />
             </div>
         </div>
@@ -96,9 +62,9 @@ const Dashboard = () => {
             <div style={styles.singleCol}>
             </div>
             <div style={styles.flex}>
-                <MonthlyRevenue value={revenue} />
+                <MonthlyRevenue value={CountUser?.toString()} />
                 <Spacer />
-                <NbNewOrders value={nbNewOrders} />
+                <NbNewOrders value={CountTodos} />
             </div>
         </div>
     ) : (
@@ -106,9 +72,9 @@ const Dashboard = () => {
             <div style={styles.flex}>
                 <div style={styles.leftCol}>
                     <div style={styles.flex}>
-                        <MonthlyRevenue value={revenue} />
+                        <MonthlyRevenue value={CountUser?.toString()} />
                         <Spacer />
-                        <NbNewOrders value={nbNewOrders} />
+                        <NbNewOrders value={CountTodos} />
                     </div>
                 </div>
             </div>
